@@ -3,14 +3,17 @@
 DOMAIN="api.prisism.com"
 EMAIL="me@bricn.net"
 
-# 1. certbot 컨테이너로 인증서 요청
-podman-compose run --rm certbot certonly \
+# 인증서 발급을 위한 certbot 컨테이너 실행
+podman run --rm \
+    -v "prisism-certbot/conf:/etc/letsencrypt" \
+    -v "prisism-certbot/www:/var/www/certbot" \
+    certbot/certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
-    --email $EMAIL \
+    --email "$EMAIL" \
     --agree-tos \
     --no-eff-email \
-    -d $DOMAIN
+    -d "$DOMAIN"
 
 # 2. Nginx 다시 시작 (인증서 반영)
 podman-compose restart nginx
