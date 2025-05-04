@@ -11,7 +11,7 @@ services:
     volumes:
       - prisism-postgres:/var/lib/postgresql/data
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.containers.internal:host-gateway"
 
   server:
     image: prisism/prisism-server:latest
