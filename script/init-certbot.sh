@@ -5,8 +5,8 @@ EMAIL="me@bricn.net"
 
 # 인증서 발급을 위한 certbot 컨테이너 실행
 podman run --rm \
-    -v "prisism-certbot/conf:/etc/letsencrypt" \
-    -v "prisism-certbot/www:/var/www/certbot" \
+    -v "prisism-letsencrypt:/etc/letsencrypt" \
+    -v "prisism-certbot:/var/www/certbot" \
     certbot/certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
