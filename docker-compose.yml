@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: docker.io/library/postgres:latest
+    container_name: prisism-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "1234"
+    volumes:
+      - prisism-postgres:/var/lib/postgresql/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  server:
+    image: prisism/prisism-server:latest
+    container_name: prisism-server
+    ports:
+      - "3030:3030"
+      - "3001:3001"
+    env_file:
+      - .env
+
+volumes:
+  prisism-postgres:
