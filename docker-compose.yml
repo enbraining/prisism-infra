@@ -41,7 +41,8 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/api.prisism.com.conf:/etc/nginx/conf.d/api.prisism.com.conf
+      - ./nginx/api.prisism.com:/etc/nginx/sites-available/api.prisism.com
+      - ./nginx/proxy_params:/etc/nginx/proxy_params
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
 volumes:
